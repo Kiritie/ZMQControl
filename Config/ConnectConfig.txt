@@ -1,0 +1,7 @@
+[
+	{
+		"name": "default",
+		"channel_type": 2,
+		"server_url": "tcp://192.168.21.188:6674"
+	}
+]
