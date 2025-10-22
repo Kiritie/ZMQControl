@@ -1,7 +1,7 @@
 [
 	{
-		"name": "default",
+		"name": "Default",
 		"channel_type": 2,
-		"server_url": "tcp://192.168.21.188:6674"
+		"server_url": "tcp://127.0.0.1:6674"
 	}
 ]

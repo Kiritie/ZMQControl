@@ -18,6 +18,11 @@ public:
 	// Sets default values for this actor's properties
 	AZMQCoreManager();
 
+	static AZMQCoreManager* Get();
+
+private:
+	static AZMQCoreManager* Instance;
+	
 public:
 	/**
 	* 当初始化

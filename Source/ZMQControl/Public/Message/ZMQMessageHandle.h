@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
-#include "ZMQMessageHandleBase.generated.h"
+#include "ZMQMessageHandle.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
-class ZMQCONTROL_API UZMQMessageHandleBase : public UObject
+class ZMQCONTROL_API UZMQMessageHandle : public UObject
 {
 	GENERATED_BODY()
 
 public:
-	UZMQMessageHandleBase();
+	UZMQMessageHandle();
 
 public:
 	/**
