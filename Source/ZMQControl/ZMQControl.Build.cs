@@ -55,21 +55,32 @@ public class ZMQControl : ModuleRules
 		string binariesDir = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "..", "Binaries", "Win64"));
 		string engineBinaries = Path.GetFullPath(Path.Combine(EngineDirectory, "Binaries", "Win64"));
 		
+		if (!Directory.Exists(binariesDir))
+		{
+			Directory.CreateDirectory(binariesDir);
+		}
+			
+		if (!Directory.Exists(engineBinaries))
+		{
+			Directory.CreateDirectory(engineBinaries);
+		}
+
 		foreach (string iter in DllNames)
 		{
 			string dllPath = Path.Combine(LibraryPath, iter);
 			string destDllPath = Path.Combine(binariesDir, iter);
 			string engineDllPath = Path.Combine(engineBinaries, iter);
-			
+
 			if (!File.Exists(destDllPath) && File.Exists(dllPath))
 			{
 				File.Copy(dllPath, destDllPath, false);
 			}
+			
 			if (!File.Exists(engineDllPath) && File.Exists(dllPath))
 			{
 				File.Copy(dllPath, engineDllPath, false);
 			}
-			
+
 			RuntimeDependencies.Add(destDllPath);
 			RuntimeDependencies.Add(Path.Combine("$(TargetOutputDir)", iter), destDllPath);
 
