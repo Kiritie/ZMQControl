@@ -6,6 +6,8 @@
 #include "ZMQControlTypes.h"
 #include "Message/ZMQMessageManager.h"
 
+AZMQCoreManager* AZMQCoreManager::Instance = nullptr;
+
 // Sets default values
 AZMQCoreManager::AZMQCoreManager()
 {
@@ -17,9 +19,16 @@ AZMQCoreManager::AZMQCoreManager()
 	MessageManagerMap = TMap<FString, UZMQMessageManager*>();
 }
 
+AZMQCoreManager* AZMQCoreManager::Get()
+{
+	return Instance;
+}
+
 void AZMQCoreManager::OnInitialize()
 {
 	K2_OnInitialize();
+
+	Instance = this;
 
 	for(const auto Iter : MessageManagers)
 	{
@@ -50,6 +59,8 @@ void AZMQCoreManager::OnRefresh(float DeltaSeconds)
 void AZMQCoreManager::OnTermination()
 {
 	K2_OnTermination();
+
+	Instance = nullptr;
 
 	for(const auto Iter : MessageManagerMap)
 	{

@@ -6,7 +6,7 @@
 #include "ZMQControlTypes.h"
 #include "ZMQMessageManager.generated.h"
 
-class UZMQMessageHandleBase;
+class UZMQMessageHandle;
 
 UCLASS(Blueprintable, EditInlineNew)
 class ZMQCONTROL_API UZMQMessageManager : public UObject
@@ -73,10 +73,10 @@ protected:
 	FString ServerURL;
 
 	UPROPERTY(EditAnywhere, Instanced)
-	TArray<UZMQMessageHandleBase*> MessageHandles;
+	TArray<UZMQMessageHandle*> MessageHandles;
 
 	UPROPERTY(VisibleAnywhere)
-	TMap<FGameplayTag, UZMQMessageHandleBase*> MessageHandleMap;
+	TMap<FGameplayTag, UZMQMessageHandle*> MessageHandleMap;
 
 	UPROPERTY(VisibleAnywhere)
 	bool bIsWorking;
@@ -90,8 +90,8 @@ public:
 	FString GetManagerName() const { return ManagerName; }
 
 	UFUNCTION(BlueprintPure)
-	TArray<UZMQMessageHandleBase*> GetMessageHandles() const;
+	TArray<UZMQMessageHandle*> GetMessageHandles() const;
 
 	UFUNCTION(BlueprintPure)
-	UZMQMessageHandleBase* GetMessageHandleByTag(const FGameplayTag& InTag) const;
+	UZMQMessageHandle* GetMessageHandleByTag(const FGameplayTag& InTag) const;
 };

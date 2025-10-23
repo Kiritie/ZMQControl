@@ -11,6 +11,10 @@ namespace GameplayTags
 	////////////////////////////////////////////////////
 	// Messages
 	ZMQCONTROL_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Message_SpawnEntity);
+	ZMQCONTROL_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Message_DestroyEntity);
+	
+	ZMQCONTROL_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Message_PlaySound);
+	ZMQCONTROL_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Message_StopSound);
 }
 
 USTRUCT(BlueprintType)
