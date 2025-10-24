@@ -61,6 +61,7 @@ struct FZMQStatus
 {
 	static const FZMQStatusCode SUCCESS;		//200 成功
 	static const FZMQStatusCode CREATED;		//201 创建成功
+	static const FZMQStatusCode EXISTED;		//202 已存在
 	static const FZMQStatusCode NOT_FOUND;		//404 找不到
 	static const FZMQStatusCode TIMEOUT;		//408 超时
 	static const FZMQStatusCode BAD_REQUEST;	//400 参数错误

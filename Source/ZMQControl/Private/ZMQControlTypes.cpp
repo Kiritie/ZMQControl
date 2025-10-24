@@ -15,6 +15,7 @@ namespace GameplayTags
 
 const FZMQStatusCode FZMQStatus::SUCCESS(200, TEXT("Success"));
 const FZMQStatusCode FZMQStatus::CREATED(201, TEXT("Created"));
+const FZMQStatusCode FZMQStatus::EXISTED(202, TEXT("Created Failed"));
 const FZMQStatusCode FZMQStatus::NOT_FOUND(404, TEXT("Not Found"));
 const FZMQStatusCode FZMQStatus::TIMEOUT(408, TEXT("Request Timeout"));
 const FZMQStatusCode FZMQStatus::SERVER_ERROR(500, TEXT("Internal Server Error"));

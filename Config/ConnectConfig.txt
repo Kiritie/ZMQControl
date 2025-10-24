@@ -7,6 +7,6 @@
 	{
         "name": "Publish",
         "channel_type": 1,
-        "server_url": "tcp://127.0.0.1:6675"
+        "server_url": "tcp://*:6675"
     }
 ]
