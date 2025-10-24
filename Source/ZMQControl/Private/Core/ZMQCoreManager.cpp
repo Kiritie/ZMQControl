@@ -42,22 +42,22 @@ void AZMQCoreManager::OnInitialize()
 		if(UZMQMessageManager* MessageManager = GetMessageManagerByName(Iter.Name))
 		{
 			MessageManager->Connect(Iter);
-			MessageManager->StartWork();
-			// switch (Iter.ChannelType)
-			// {
-			// 	case ZMQ_REP:
-			// 	case ZMQ_SUB:
-			// 		MessageManager->StartWork();
-			// 		UE_LOG(LogTemp, Log, TEXT("[ZMQ] Started receiving on channel: %s (type=%d)"),*Iter.Name,Iter.ChannelType);
-			// 		break;
-			// 	case ZMQ_REQ:
-			// 	case ZMQ_PUB:
-			// 		UE_LOG(LogTemp, Log, TEXT("[ZMQ] Initialized send-only channel: %s (type=%d)"), *Iter.Name, Iter.ChannelType);
-			// 		break;
-			// 	default:
-			// 		UE_LOG(LogTemp, Warning, TEXT("[ZMQ] Unknown channel type for %s: %d"), *Iter.Name, Iter.ChannelType);
-			// 		break;
-			// }
+			// MessageManager->StartWork();
+			switch (Iter.ChannelType)
+			{
+				case ZMQ_REP:
+				case ZMQ_SUB:
+					MessageManager->StartWork();
+					UE_LOG(LogTemp, Log, TEXT("[ZMQ] Started receiving on channel: %s (type=%d)"),*Iter.Name,Iter.ChannelType);
+					break;
+				case ZMQ_REQ:
+				case ZMQ_PUB:
+					UE_LOG(LogTemp, Log, TEXT("[ZMQ] Initialized send-only channel: %s (type=%d)"), *Iter.Name, Iter.ChannelType);
+					break;
+				default:
+					UE_LOG(LogTemp, Warning, TEXT("[ZMQ] Unknown channel type for %s: %d"), *Iter.Name, Iter.ChannelType);
+					break;
+			}
 		}
 	}
 }
