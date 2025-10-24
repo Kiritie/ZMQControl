@@ -94,4 +94,7 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	UZMQMessageHandle* GetMessageHandleByTag(const FGameplayTag& InTag) const;
+
+	UFUNCTION(BlueprintCallable, Category = "ZMQ")
+	void SendStatusToServer(const FZMQStatusCode& Status, const FString& InData);
 };

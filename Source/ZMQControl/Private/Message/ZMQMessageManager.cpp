@@ -2,6 +2,7 @@
 
 #include "Message/ZMQMessageManager.h"
 
+#include "Core/ZMQCoreManager.h"
 #include "ZMQ/zmq.hpp"
 #include "Message/ZMQMessageHandle.h"
 
@@ -173,4 +174,45 @@ UZMQMessageHandle* UZMQMessageManager::GetMessageHandleByTag(const FGameplayTag&
 		return MessageHandleMap[InTag];
 	}
 	return nullptr;
+}
+
+void UZMQMessageManager::SendStatusToServer(const FZMQStatusCode& Status, const FString& MsgContext)
+{
+	if (ManagerName != TEXT("Publish"))
+	{
+		UZMQMessageManager* PublishManager = AZMQCoreManager::Get()->GetMessageManagerByName(TEXT("Publish"));
+		if (PublishManager && PublishManager->Scriber)
+		{
+			PublishManager->SendStatusToServer(Status, MsgContext);
+			return;
+		}
+	}
+	//当通道是Publish，执行发布逻辑
+	if (!Scriber)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[ZMQ] No active connection, cannot send status"));
+		return;
+	}
+
+	//构造Json消息
+	TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
+	JsonObject->SetNumberField(TEXT("code"),Status.StatusCode);
+	JsonObject->SetStringField(TEXT("message"),Status.Message);
+	JsonObject->SetStringField(TEXT("context"),MsgContext);
+
+	FString OutputString;
+	TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&OutputString);
+	FJsonSerializer::Serialize(JsonObject.ToSharedRef(), Writer);
+
+	int Result = zmq_send(Scriber, TCHAR_TO_UTF8(*OutputString), strlen(TCHAR_TO_UTF8(*OutputString)), ZMQ_DONTWAIT);
+	if (Result == -1)
+	{
+		int Err = zmq_errno();
+		const char* ErrMsg = zmq_strerror(Err);
+		UE_LOG(LogTemp, Error, TEXT("[ZMQ] Failed To Send Message: %s %d"), *FString(UTF8_TO_TCHAR(ErrMsg)) ,Err);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("[ZMQ] Sent status to Python: %s"), *OutputString);
+	}
 }
