@@ -7,6 +7,7 @@ namespace GameplayTags
 	////////////////////////////////////////////////////
 	// Messages
 	UE_DEFINE_GAMEPLAY_TAG(Message_SpawnEntity, "Message.SpawnEntity");
+	UE_DEFINE_GAMEPLAY_TAG(Message_SpawnDynamicEntity, "Message.SpawnDynamicEntity");
 	UE_DEFINE_GAMEPLAY_TAG(Message_DestroyEntity, "Message.DestroyEntity");
 
 	UE_DEFINE_GAMEPLAY_TAG(Message_PlaySound, "Message.PlaySound");
